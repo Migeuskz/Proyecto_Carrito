@@ -11,18 +11,35 @@ cargarEventListener();
 function cargarEventListener(e){
     //Dispara cuando se presiona "Agregar Carrito"
     //cuando un evento agrega un curso
-    listaCurso.addEventListener('click', agrgarCurso);
+    listaCurso.addEventListener('click', agregarCurso);
     //console.log(e.target.parentElenment);
+
+    //elimina cursos del carrito
+    carrito.addEventListener('click', eliminarCurso);
 }
 
 //Funciones
 //Función que añade el curso al carrito
-function agrgarCurso(e){
+function agregarCurso(e){
     e.preventDefault();
     //Delegation para agregar-carrito
     if(e.target.classList.contains('agregar-carrito')){
         const cursoSelecionado = e.target.parentElement.parentElement;
         leerDatosCursos(cursoSelecionado);
+    }
+}
+
+//Elimina un curso del carrito
+function eliminarCurso(e) {
+    e.preventDefault();
+    if(e.target.classList.contains('borrar-curso') ) {
+         // e.target.parentElement.parentElement.remove();
+         const cursoId = e.target.getAttribute('data-id')
+         
+         // Eliminar del arreglo del carrito
+         articulosCarrito = articulosCarrito.filter(curso => curso.id !== cursoId);
+            console.log(articulosCarrito);
+         carritoHTML();//iterar el carrito y borramos sus HTML
     }
 }
 
@@ -41,25 +58,25 @@ function leerDatosCursos(curso){
 
     //Revisa si un elemento ya existe en el carrito
     if( articulosCarrito.some( curso => curso.id === infoCurso.id ) ) { 
-        const cursos = articulosCarrito.map( curso => {
-             if( curso.id === infoCurso.id ) {
-                  curso.cantidad++;
-                   return curso;
-              } else {
-                   return curso;
-           }
-        })
-        articulosCarrito = [...cursos];
-   }  else {
-        articulosCarrito = [...articulosCarrito, infoCurso];
-   }
+          const cursos = articulosCarrito.map( curso => {
+               if( curso.id === infoCurso.id ) {
+                    curso.cantidad++;
+                     return curso;
+                } else {
+                     return curso;
+             }
+          })
+          articulosCarrito = [...cursos];
+     }  else {
+          articulosCarrito = [...articulosCarrito, infoCurso];
+     }
 
-   // console.log(articulosCarrito)
+     // console.log(articulosCarrito)
 
-   
+     
 
-   // console.log(articulosCarrito)
-   carritoHTML();
+     // console.log(articulosCarrito)
+     carritoHTML();
 }
 
 

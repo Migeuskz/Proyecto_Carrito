@@ -2,7 +2,7 @@
 const carrito = document.querySelector('#carrito');
 const contenedorCarrito = document.querySelector('#lista-carrito tbody');
 const listaCurso = document.querySelector('#lista-cursos');
-const vaciarCarrito = document.querySelector('vaciar-carrito');
+const vaciarCarrito = document.querySelector('#vaciar-carrito');
 let articulosCarrito = [];
 
 //
@@ -42,7 +42,7 @@ function eliminarCurso(e) {
     if(e.target.classList.contains('borrar-curso') ) {
          // e.target.parentElement.parentElement.remove();
          const cursoId = e.target.getAttribute('data-id')
-         
+         console.log(e.target)
          // Eliminar del arreglo del carrito
          articulosCarrito = articulosCarrito.filter(curso => curso.id !== cursoId);
             console.log(articulosCarrito);
@@ -110,7 +110,7 @@ function carritoHTML(){
             <td>${precio}</td>
             <td>${cantidad}</td>
             <td>
-                <a href="#" class="borrar-curso" data=id"${curso.id}"> X </a>
+                <a href="#" class="borrar-curso" data-id="${curso.id}"> X </a>
             </td>
         `;
         //Agrega el HTML del carrito en el tbody
